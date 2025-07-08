@@ -8,6 +8,7 @@ import com.cinnamonbay.backend.response.RoomResponse;
 import com.cinnamonbay.backend.service.BookingService;
 import com.cinnamonbay.backend.service.IRoomService;
 //import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +19,10 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.time.*;
 import java.util.*;
 
+@CrossOrigin("http://localhost:5173")
 @RestController
 //@RequiredArgsConstructor
 @RequestMapping("/rooms")
@@ -106,6 +109,29 @@ public class RoomController {
             return ResponseEntity.ok(Optional.of(roomResponse));
         }).orElseThrow(() -> new ResourceNotFoundException("Room not found"));
 
+    }
+
+    @GetMapping("/available-rooms")
+    public ResponseEntity<List<RoomResponse>> getAvailableRooms(
+           @RequestParam("checkInDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkInDate,
+           @RequestParam("checkOutDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkoutDate,
+           @RequestParam String roomType){
+        List<Room> availableRooms = roomService.getAvailableRooms(checkInDate, checkoutDate, roomType);
+        List<RoomResponse> roomResponses = new ArrayList<>();
+        for(Room room : availableRooms){
+            byte[] photoBytes = roomService.getRoomPhotoByRoomId(room.getId());
+            if(photoBytes != null && photoBytes.length > 0){
+                String photoBase64 = java.util.Base64.getEncoder().encodeToString(photoBytes); // ✅ Works with Java 8+
+                RoomResponse roomResponse = getRoomResponse(room);
+                roomResponse.setPhoto(photoBase64);
+                roomResponses.add(roomResponse);
+            }
+        }
+        if(roomResponses.isEmpty()){
+            return ResponseEntity.noContent().build();
+        } else{
+            return ResponseEntity.ok(roomResponses);
+        }
     }
 
     private RoomResponse getRoomResponse(Room room) {
