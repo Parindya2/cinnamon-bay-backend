@@ -12,10 +12,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.Arrays;
 
-/**
- * @author Simpson Alfred
- */
-
 @Configuration
 @EnableWebMvc
 public class CorsConfig {
@@ -30,7 +26,7 @@ public class CorsConfig {
 
         config.setAllowCredentials(true);
         config.addAllowedOrigin("http://localhost:5173");
-        config.addAllowedOrigin("http://localhost:3000"); // Add if using different port
+        config.addAllowedOrigin("http://localhost:3000"); 
 
         // Allow all headers
         config.addAllowedHeader("*");
