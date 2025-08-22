@@ -1,14 +1,10 @@
 package com.cinnamonbay.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.*;
 
-/**
- * @author Simpson Alfred
- */
 @Entity
 @Table(name = "role")
 @Getter

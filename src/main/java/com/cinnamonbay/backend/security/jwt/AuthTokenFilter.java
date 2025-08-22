@@ -63,12 +63,15 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private boolean isPublicEndpoint(String path) {
-        return path.startsWith("/auth") ||
-                path.startsWith("/rooms") ||
-                path.equals("/error") ||
-                path.startsWith("/error/");
-    }
+   private boolean isPublicEndpoint(String path) {
+    return path.startsWith("/auth") ||
+           path.equals("/rooms/all-rooms") ||
+           path.equals("/rooms/room/types") ||
+           path.startsWith("/rooms/available-rooms") ||
+           path.startsWith("/rooms/room/") && path.matches("/rooms/room/\\d+") || // GET room by ID
+           path.equals("/error") ||
+           path.startsWith("/error/");
+}
 
     private String parseJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");

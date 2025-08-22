@@ -28,10 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * @author Simpson Alfred
- */
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/rooms")
@@ -78,7 +74,7 @@ public class RoomController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/update/{roomId}")
+    @PatchMapping("/update/{roomId}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<RoomResponse> updateRoom(@PathVariable Long roomId,
                                                    @RequestParam(required = false)  String roomType,
@@ -125,9 +121,6 @@ public class RoomController {
         }
     }
 
-
-
-
     private RoomResponse getRoomResponse(Room room) {
         List<BookedRoom> bookings = getAllBookingsByRoomId(room.getId());
         List<BookingResponse> bookingInfo = bookings
@@ -153,5 +146,4 @@ public class RoomController {
         return bookingService.getAllBookingsByRoomId(roomId);
 
     }
-
 }
