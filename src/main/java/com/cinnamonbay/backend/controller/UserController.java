@@ -1,22 +1,15 @@
 package com.cinnamonbay.backend.controller;
 
-import com.cinnamonbay.backend.model.*;
 import com.cinnamonbay.backend.model.User;
 import com.cinnamonbay.backend.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-/**
- * @author Simpson Alfred
- */
 
 @RestController
 @RequestMapping("/users")

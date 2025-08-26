@@ -4,12 +4,7 @@ import lombok.*;
 
 import java.util.List;
 
-/**
- * @author Simpson Alfred
- */
-
 @Data
-
 
 @NoArgsConstructor
 public class JwtResponse {

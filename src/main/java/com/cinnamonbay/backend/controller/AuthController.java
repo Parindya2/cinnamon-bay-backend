@@ -20,10 +20,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-
-/**
- * @author Simpson Alfred
- */
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor

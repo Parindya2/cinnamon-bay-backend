@@ -10,8 +10,6 @@ import com.cinnamonbay.backend.service.IRoomService;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.format.annotation.DateTimeFormat;
-import lombok.*;
-import org.springframework.format.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,10 +25,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-/**
- * @author Simpson Alfred
- */
 
 @RestController
 @RequiredArgsConstructor
@@ -78,7 +72,7 @@ public class RoomController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/update/{roomId}")
+    @PatchMapping("/update/{roomId}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<RoomResponse> updateRoom(@PathVariable Long roomId,
                                                    @RequestParam(required = false)  String roomType,
@@ -125,9 +119,6 @@ public class RoomController {
         }
     }
 
-
-
-
     private RoomResponse getRoomResponse(Room room) {
         List<BookedRoom> bookings = getAllBookingsByRoomId(room.getId());
         List<BookingResponse> bookingInfo = bookings
@@ -153,5 +144,4 @@ public class RoomController {
         return bookingService.getAllBookingsByRoomId(roomId);
 
     }
-
 }
