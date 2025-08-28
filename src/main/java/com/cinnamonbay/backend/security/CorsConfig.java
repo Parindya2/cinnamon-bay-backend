@@ -26,7 +26,8 @@ public class CorsConfig {
 
         config.setAllowCredentials(true);
         config.addAllowedOrigin("http://localhost:5173");
-        config.addAllowedOrigin("http://localhost:3000"); 
+        config.addAllowedOrigin("http://localhost:3000");
+        config.addAllowedOrigin("https://cinnamon-bay-frontend.vercel.app/");
 
         // Allow all headers
         config.addAllowedHeader("*");
