@@ -2,7 +2,7 @@ spring:
   application:
     name: cinnamon-bay-backend
   datasource:
-    url: ${DATABASE_URL:jdbc:mysql://yamabiko.proxy.rlwy.net:17387/railway?useSSL=false&serverTimezone=UTC}
+    url: ${DATABASE_URL}
     username: ${DATABASE_USER:root}
     password: ${DATABASE_PASSWORD:MpEbtwHnCBHEKMniWDUcvPBMFnHVbhzZ}
     driver-class-name: com.mysql.cj.jdbc.Driver
